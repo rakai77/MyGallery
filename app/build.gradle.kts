@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
+    implementation(libs.appcompat)
     implementation(libs.com.google.android.material.material)
     implementation(libs.splash.api)
     implementation(libs.icons.extended)
