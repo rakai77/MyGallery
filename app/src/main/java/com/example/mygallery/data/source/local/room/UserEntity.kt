@@ -19,10 +19,7 @@ data class UserEntity(
     val name: String,
 
     @ColumnInfo(name = "phone_number")
-    val phoneNumber: String,
-
-    @ColumnInfo(name = "role")
-    val role: String
+    val phoneNumber: String
 )
 
 fun UserEntity.toDomain() = User (
@@ -30,5 +27,4 @@ fun UserEntity.toDomain() = User (
     this.name,
     this.password,
     this.phoneNumber,
-    this.role
 )

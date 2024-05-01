@@ -1,4 +1,4 @@
-package com.example.mygallery.presentation.login
+package com.example.mygallery.presentation.register
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -38,7 +38,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.example.mygallery.R
+import com.example.mygallery.domain.model.User
 import com.example.mygallery.presentation.component.PasswordTextField
+import com.example.mygallery.presentation.component.PlainTextField
 import com.example.mygallery.presentation.component.TextHeader
 import com.example.mygallery.presentation.component.TrailingTextField
 import com.example.mygallery.presentation.theme.Black
@@ -47,81 +49,123 @@ import com.example.mygallery.utils.EmptyStateModel
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun LoginScreen(
-    viewModel: LoginViewModel,
-    onNavigateToRegister: () -> Unit,
+fun RegisterScreen(
+    viewModel: RegisterViewModel,
+    onNavigateBack: () -> Unit,
     onNavigateToHome: () -> Unit,
-    onLoginError: (EmptyStateModel) -> Unit
+    onRegisterError: (EmptyStateModel) -> Unit
 ) {
-
+    var name by remember {
+        mutableStateOf("")
+    }
+    var phone by remember {
+        mutableStateOf("")
+    }
     var email by remember {
         mutableStateOf("")
     }
     var password by remember {
         mutableStateOf("")
     }
+    var confirmPassword by remember {
+        mutableStateOf("")
+    }
 
-    val uiState by viewModel.loginUiState.collectAsState(initial = LoginUiState.Idle)
+    val uiState by viewModel.registerUiState.collectAsState(initial = RegisterUiState.Idle)
     val keyboardController = LocalSoftwareKeyboardController.current
-    val registerText = stringResource(id = R.string.register)
-    val notHaveAccount = stringResource(id = R.string.not_have_account) + stringResource(id = R.string.space)
-    val registerString = buildAnnotatedString {
+    val loginText = stringResource(id = R.string.login)
+    val haveAccount =
+        stringResource(id = R.string.have_account) + stringResource(id = R.string.space)
+    val loginString = buildAnnotatedString {
         withStyle(style = SpanStyle(color = Black)) {
-            pushStringAnnotation(tag = notHaveAccount, annotation = notHaveAccount)
-            append(notHaveAccount)
+            pushStringAnnotation(tag = haveAccount, annotation = haveAccount)
+            append(haveAccount)
         }
         withStyle(style = SpanStyle(color = Primary, fontWeight = FontWeight.SemiBold)) {
-            pushStringAnnotation(tag = registerText, annotation = registerText)
-            append(registerText)
+            pushStringAnnotation(tag = loginText, annotation = loginText)
+            append(loginText)
         }
     }
 
-    val isButtonEnable by remember {
+    val isButtonEnabled by remember {
         derivedStateOf {
-            email.trim().isNotEmpty() && password.trim().isNotEmpty()
+            name.trim().isNotEmpty() &&
+                    phone.trim().isNotEmpty() &&
+                    email.trim().isNotEmpty() &&
+                    password.trim().isNotEmpty() &&
+                    confirmPassword == password
         }
     }
+
 
     LaunchedEffect(uiState) {
         when (uiState) {
-            is LoginUiState.Loading -> {
+            is RegisterUiState.Loading -> {
 
             }
-            is LoginUiState.Success -> {
-                viewModel.storeEmail((uiState as LoginUiState.Success).data.email)
-                onNavigateToHome.invoke()
+
+            is RegisterUiState.Success -> {
+                onNavigateBack.invoke()
             }
-            is LoginUiState.Error -> {
-                onLoginError.invoke(
+
+            is RegisterUiState.Error -> {
+                onRegisterError.invoke(
                     EmptyStateModel(
                         R.raw.jeky_error,
                         "Ups, something error",
-                        (uiState as LoginUiState.Error).message,
+                        (uiState as RegisterUiState.Error).message,
                         "Okay"
                     )
                 )
             }
+
             else -> Unit
         }
     }
 
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .verticalScroll(rememberScrollState())
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
     ) {
         TextHeader(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 44.dp)
                 .padding(horizontal = 24.dp),
-            headerText = stringResource(R.string.login_title),
-            supportText = stringResource(R.string.login_description)
+            headerText = stringResource(R.string.register_title),
+            supportText = stringResource(R.string.register_description)
+        )
+        PlainTextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 36.dp)
+                .padding(horizontal = 24.dp),
+            value = name,
+            label = stringResource(R.string.full_name),
+            placeholder = stringResource(R.string.your_full_name),
+            onValueChange = {
+                name = it
+            }
+        )
+        PlainTextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 24.dp)
+                .padding(horizontal = 24.dp),
+            value = phone,
+            label = stringResource(R.string.phone),
+            placeholder = stringResource(R.string.your_phone_number),
+            keyboardOption = KeyboardOptions(keyboardType = KeyboardType.Phone),
+            onValueChange = {
+                phone = it
+            }
         )
         TrailingTextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 36.dp)
+                .padding(top = 24.dp)
                 .padding(horizontal = 24.dp),
             value = email,
             label = stringResource(R.string.email),
@@ -146,6 +190,18 @@ fun LoginScreen(
                 password = it
             }
         )
+        PasswordTextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 24.dp)
+                .padding(horizontal = 24.dp),
+            value = confirmPassword,
+            label = stringResource(R.string.confirm_password),
+            placeholder = stringResource(R.string.input_confirm_password),
+            onValueChange = {
+                confirmPassword = it
+            }
+        )
         Button(
             modifier = Modifier
                 .fillMaxWidth()
@@ -157,14 +213,18 @@ fun LoginScreen(
                 containerColor = Primary
             ),
             contentPadding = PaddingValues(vertical = 16.dp),
-            enabled = isButtonEnable,
+            enabled = isButtonEnabled,
             onClick = {
-                viewModel.login(email, password)
+                viewModel.register(
+                    User(
+                        email, password, name, phone
+                    )
+                )
                 keyboardController?.hide()
             }
         ) {
             Text(
-                text = stringResource(id = R.string.login),
+                text = stringResource(id = R.string.register),
                 style = MaterialTheme.typography.labelMedium
             )
         }
@@ -173,17 +233,16 @@ fun LoginScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp)
-                .padding(bottom = 30.dp, top = 70.dp)
-            ,
+                .padding(bottom = 30.dp, top = 70.dp),
             style = MaterialTheme.typography.bodyMedium.copy(
                 textAlign = TextAlign.Center
             ),
-            text = registerString,
+            text = loginString,
             onClick = { offset ->
-                registerString.getStringAnnotations(offset, offset)
+                loginString.getStringAnnotations(offset, offset)
                     .firstOrNull()?.let { span ->
-                        if (span.item == registerText) {
-                            onNavigateToRegister.invoke()
+                        if (span.item == loginText) {
+                            onNavigateBack.invoke()
                         }
                     }
             }

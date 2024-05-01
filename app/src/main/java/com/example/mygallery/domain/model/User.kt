@@ -7,13 +7,11 @@ data class User(
     val password: String,
     val name: String,
     val phoneNumber: String,
-    val role: String
 )
 
 fun User.toEntity() = UserEntity (
     this.email,
     this.password,
     this.name,
-    this.phoneNumber,
-    this.role
+    this.phoneNumber
 )
