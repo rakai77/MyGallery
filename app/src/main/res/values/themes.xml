@@ -2,4 +2,9 @@
 <resources>
 
     <style name="Theme.MyGallery" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.MyGallerySplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon" >@drawable/gallery_logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.MyGallery</item>
+        <item name="windowSplashScreenBackground">@color/white</item>>
+    </style>
 </resources>
