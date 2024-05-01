@@ -28,7 +28,7 @@ retrofit-gson = "2.9.0"
 interceptor = "5.0.0-alpha.6"
 
 #Hilt
-dagger = "2.45"
+dagger = "2.46.1"
 hilt-compose = "1.0.0"
 
 [libraries]
