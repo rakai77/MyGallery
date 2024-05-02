@@ -1,11 +1,10 @@
-package com.example.mygallery.domain
+package com.example.mygallery.domain.repository
 
 import app.cash.turbine.test
 import com.example.mygallery.data.repository.PhotoRepositoryImpl
 import com.example.mygallery.data.source.Resource
 import com.example.mygallery.data.source.remote.ApiService
 import com.example.mygallery.data.source.remote.dto.PhotosResponse
-import com.example.mygallery.domain.repository.PhotoRepository
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.coVerify
