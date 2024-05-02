@@ -1,7 +1,8 @@
 ## News App using Jetpack Compose
 
 ## Screenshoot
-![Screenshot_1714622314](https://github.com/rakai77/MyGallery/assets/58464856/bcfc9db6-d607-46a1-86b5-7f56a112d1f0)
+<img width="315" alt="Screenshot 2024-05-02 at 11 47 34" src="https://github.com/rakai77/MyGallery/assets/58464856/80bb395f-9821-42fd-b9f7-1b07d1365dd5">
+
 
 
 ## Tech Stack : 
