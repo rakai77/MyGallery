@@ -8,13 +8,14 @@
 
 ## Tech Stack : 
  1. MVVM pattern
- 2. Room Database (for login and register)
- 3. UI: Jetpack Compose
- 4. Retrofit
- 5. Hilt Dependency
- 6. Repository and Usecase pattern
- 7. Kotlin Coroutines
- 8. Datastore
+ 2. Implement clean code 
+ 3. Room Database (for login and register)
+ 4. UI: Jetpack Compose
+ 5. Retrofit networking
+ 6. Hilt Dependency
+ 7. Repository and Usecase pattern
+ 8. Kotlin Coroutines
+ 9. Datastore
 
 ## Note :
 https://jsonplaceholder.typicode.com/photos this API can't provide pagination rules.
