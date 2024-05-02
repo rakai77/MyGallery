@@ -16,6 +16,7 @@
  7. Repository and Usecase pattern
  8. Kotlin Coroutines
  9. Datastore
+ 10. Unit Test (using mockk and turbine)
 
 ## Note :
 https://jsonplaceholder.typicode.com/photos this API can't provide pagination rules.
