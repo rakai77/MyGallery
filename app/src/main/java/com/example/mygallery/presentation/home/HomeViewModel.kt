@@ -36,7 +36,6 @@ class HomeViewModel @Inject constructor(
                         is Resource.Error -> {
                             _uiState.value = (HomeUiState.Error(result.message))
                         }
-                        else -> Unit
                     }
                 }
         }

@@ -3,7 +3,7 @@ package com.example.mygallery.domain.usecase
 import app.cash.turbine.test
 import com.example.mygallery.data.interactor.PhotoInteractor
 import com.example.mygallery.data.source.Resource
-import com.example.mygallery.domain.data.listPhoto
+import com.example.mygallery.data.listPhoto
 import com.example.mygallery.domain.repository.PhotoRepository
 import io.mockk.MockKAnnotations
 import io.mockk.clearAllMocks
