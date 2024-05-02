@@ -92,6 +92,12 @@ dependencies {
     implementation(libs.bundles.hilt.dagger)
     kapt(libs.hilt.android.compiler)
 
+    // unit test
+    testImplementation(libs.mockk.android)
+    testImplementation(libs.mockk.agent)
+    testImplementation(libs.turbine)
+    testImplementation(libs.kotlinx.coroutines.test)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
