@@ -1,8 +1,10 @@
 package com.example.mygallery.di
 
 import com.example.mygallery.data.repository.AuthRepositoryImpl
+import com.example.mygallery.data.repository.PhotoRepositoryImpl
 import com.example.mygallery.data.repository.UserRepositoryImpl
 import com.example.mygallery.domain.repository.AuthRepository
+import com.example.mygallery.domain.repository.PhotoRepository
 import com.example.mygallery.domain.repository.UserRepository
 import dagger.Binds
 import dagger.Module
@@ -18,4 +20,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun provideUserRepository(userRepositoryImpl: UserRepositoryImpl) : UserRepository
+
+    @Binds
+    abstract fun providePhotoRepository(photoRepositoryImpl: PhotoRepositoryImpl) : PhotoRepository
 }
