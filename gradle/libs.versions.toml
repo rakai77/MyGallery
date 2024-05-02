@@ -17,6 +17,7 @@ material = "1.11.0"
 lottie = "6.3.0"
 gson = "2.10.1"
 datastore = "1.1.0"
+coil = "2.5.0"
 
 #Room
 room_version = "2.5.1"
@@ -68,6 +69,8 @@ com-google-android-material-material = { group = "com.google.android.material", 
 
 # Lottie
 lottie = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
+
+coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 # Gson
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }

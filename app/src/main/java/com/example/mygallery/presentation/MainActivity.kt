@@ -108,7 +108,7 @@ fun GalleryApp(viewModel: MainViewModel = hiltViewModel()) {
             composable(
                 route = Route.Home.route
             ) {
-                HomeScreen()
+                HomeScreen(viewModel = hiltViewModel())
             }
 
             bottomSheet(

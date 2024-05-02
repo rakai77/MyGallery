@@ -76,6 +76,7 @@ dependencies {
     implementation(libs.constraint.layout)
     implementation(libs.lottie)
     implementation(libs.gson)
+    implementation(libs.coil)
 
     implementation(libs.room.ktx)
     implementation(libs.room.runtime)
